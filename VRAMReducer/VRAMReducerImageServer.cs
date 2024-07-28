@@ -22,10 +22,10 @@ class VRAMReducerImageServer
         {
             if (PerformanceCEOConfig.DebugLogs.Value)
             {
-                PerformanceCEO.LogInfo($"Livery Request for {airlineName} aircraft type {aircraftType} being proccessed.");
+                PerformanceCEO.LogInfo($"Livery Request for {airlineName} aircraft type {aircraftType} being processed.");
             }
 
-            if (PerformanceCEOConfig.VRAMReductionModuleEnabled.Value == false || VRAMReducerManager.customAirlineNames.Contains(airlineName) == false)
+            if (PerformanceCEOConfig.LoadOnDemandModuleEnabled.Value == false || VRAMReducerManager.customAirlineNames.Contains(airlineName) == false)
             {
                 if (PerformanceCEOConfig.DebugLogs.Value) { PerformanceCEO.LogInfo("Image Server Exit 1"); }
                 livery = null;
@@ -129,17 +129,17 @@ class VRAMReducerImageServer
                     else
                     {
                         if (PerformanceCEOConfig.DebugLogs.Value) { PerformanceCEO.LogInfo("Image Server CP 12"); }
-                        bool thirdOccured = Utils.ChanceOccured(0.33f);
+                        bool thirdOccurred = Utils.ChanceOccured(0.33f);
                         possibleLiveryOutput.ShuffleList<PossibleLivery>();
                         for (int i = 0; i < possibleLiveryOutput.Count; i++)
                         {
                             PossibleLivery possibleLivery = possibleLiveryOutput[i];
-                            if (thirdOccured && possibleLivery.isSpecial)
+                            if (thirdOccurred && possibleLivery.isSpecial)
                             {
                                 livery = VRAMReducerLiveryCreator.GetLivery(possibleLivery.prefabPath, airlineName);
                                 break;
                             }
-                            if (!thirdOccured && !possibleLivery.isSpecial)
+                            if (!thirdOccurred && !possibleLivery.isSpecial)
                             {
                                 livery = VRAMReducerLiveryCreator.GetLivery(possibleLivery.prefabPath, airlineName);
                                 break;
@@ -172,7 +172,7 @@ class VRAMReducerImageServer
         }
         catch (Exception ex)
         {
-            PerformanceCEO.LogError($"An error occured in the Image Server. The error was {ExceptionUtils.ProccessException(ex)}.");
+            PerformanceCEO.LogError($"An error occurred in the Image Server. The error was {ExceptionUtils.ProccessException(ex)}.");
         }
         Debug.LogError("Could not find a suitable livery for! " + aircraftType);
         PerformanceCEO.LogError("Something went very very very wrong. Error! Probably was bound to happen... :( (Exit 7)");
