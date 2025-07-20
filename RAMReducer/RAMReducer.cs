@@ -7,10 +7,6 @@ using PerformanceCEO.General;
 using Newtonsoft.Json;
 
 namespace PerformanceCEO;
-static class RAMReducerManager
-{
-    public static bool LiveryImporterCall = false;
-}
 
 [HarmonyPatch(typeof(LiveryImporter))]
 [HarmonyPatch("LoadCustomLivery")]
@@ -34,7 +30,7 @@ static class Patch_RAMReducerChecker
                 LiveryData liveryData = JsonConvert.DeserializeObject<LiveryData>(Utils.ReadFile(JSONFiles[0]));
                 VRAMReducerManager.AddInfoToDicts(liveryData.aircraftType, directories[i], airlineName, liveryData.isSpecial);
             }
-            else
+            if (PerformanceCEOConfig.RAMReductionModuleEnabled.Value)
             {
                 GameObject planeLivery = LiveryImporterUniversal.LoadLivery(directories[i], airlineName, out LiveryData liveryData);
                 if (planeLivery == null)
@@ -46,28 +42,5 @@ static class Patch_RAMReducerChecker
         }
 
         return false;
-    }
-}
-
-[HarmonyPatch(typeof(Sprite), new Type[] { typeof(Texture2D), typeof(Rect), typeof(Vector2), typeof(float), typeof(uint), typeof(SpriteMeshType)})]
-[HarmonyPatch("Create")]
-static class Patch_RAMReducerApplier
-{
-    public static void Prefix(ref Texture2D texture)
-    {
-        if (RAMReducerManager.LiveryImporterCall == false || !texture.isReadable || !PerformanceCEOConfig.RAMReductionModuleEnabled.Value)
-        {
-            return;
-        }
-
-        try
-        {
-            // This does prevent editing of the sprite later on, shouldn't be an issue
-            texture.Apply(false, true);
-        }
-        catch (Exception ex)
-        {
-            PerformanceCEO.LogError($"Error occurred while reducing RAM usage (Patch_RAMReducerApplier). {ExceptionUtils.ProccessException(ex)}");
-        }
     }
 }

@@ -1,7 +1,10 @@
-﻿using BepInEx;
+﻿using AirportCEOModLoader;
+using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
+using PerformanceCEO.NewUpdateSystem;
+using PerformanceCEO.OtherTweaks;
 using UnityEngine;
 
 namespace PerformanceCEO;
@@ -39,8 +42,12 @@ public class PerformanceCEO : BaseUnityPlugin
     
     private void Start()
     {
-        AirportCEOModLoader.WatermarkUtils.WatermarkUtils.Register(new AirportCEOModLoader.WatermarkUtils.WatermarkInfo("PCEO", "1.1", true));
+        AirportCEOModLoader.WatermarkUtils.WatermarkUtils.Register(new AirportCEOModLoader.WatermarkUtils.WatermarkInfo("PCEO", "1.2.1", true));
+        AirportCEOModLoader.SaveLoadUtils.EventDispatcher.EndOfLoad += DLCCheckFix.NewCheckDLCOwnage;
         PerformanceTests.DoTests();
+
+        //gameObject.AddComponent<NewUpdateManager>();
+
         Logger.LogInfo("Finished Start");
     }
 
