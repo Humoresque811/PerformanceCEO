@@ -44,5 +44,6 @@ static class VRAMReducerManager
     {
         aircraftTypeLiveriesPathDict = new Dictionary<string, List<string>>();
         LiveryPathToAirlineNameSpecialDict = new Dictionary<string, Tuple<string, bool>>();
+        customAirlineNames = new List<string>();
     }
 }
