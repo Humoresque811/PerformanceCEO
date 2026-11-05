@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace PerformanceCEO;
 
-[BepInPlugin("org.performanceCEO.humoresque", "Performance CEO", "1.1.0")]
+[BepInPlugin("org.performanceCEO.humoresque", "Performance CEO", "1.2.2")]
 [BepInDependency("org.airportceomodloader.humoresque")]
 public class PerformanceCEO : BaseUnityPlugin
 {
@@ -42,7 +42,7 @@ public class PerformanceCEO : BaseUnityPlugin
     
     private void Start()
     {
-        AirportCEOModLoader.WatermarkUtils.WatermarkUtils.Register(new AirportCEOModLoader.WatermarkUtils.WatermarkInfo("PCEO", "1.2.1", true));
+        AirportCEOModLoader.WatermarkUtils.WatermarkUtils.Register(new AirportCEOModLoader.WatermarkUtils.WatermarkInfo("PCEO", "1.2.2", true));
         AirportCEOModLoader.SaveLoadUtils.EventDispatcher.EndOfLoad += DLCCheckFix.NewCheckDLCOwnage;
         PerformanceTests.DoTests();
 

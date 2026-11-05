@@ -4,9 +4,10 @@
     <TargetFramework>net46</TargetFramework>
     <AssemblyName>PerformanceCEO</AssemblyName>
     <Description>Performance improving mod for AirportCEO</Description>
-    <Version>1.2.1</Version>
+    <Version>1.2.2</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
+    <Authors>Humoresque, xytronix</Authors>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -43,7 +44,7 @@
       <HintPath>lib\Assembly-CSharp-publicized.dll</HintPath>
     </Reference>
     
-    <Reference Include="Assembly-CSharp-firstpass" Publicize="true" >
+    <Reference Include="Assembly-CSharp-firstpass" Publicize="true">
       <HintPath>lib\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
     
